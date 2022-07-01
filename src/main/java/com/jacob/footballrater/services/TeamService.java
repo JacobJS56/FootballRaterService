@@ -30,19 +30,20 @@ public class TeamService {
 
     public List<Team> getAllTeamsByLeague(String league) {
         List<Team> listOfTeams = teamRepository.findByLeague(league);
-        List<Team> newList = new ArrayList<>();
 
         for(Team t: listOfTeams) {
-            newList.add(updateRating(t.getId()));
+            updateRating(t.getId());
         }
 
         return listOfTeams;
     }
 
     public List<Team> getTop20Teams() {
-        List<Team> teamList = teamRepository.findAll(Sort.by(Sort.Direction.DESC, "Rating"));
-
-        return teamList.subList(0, 20);
+        List<Team> teamList = teamRepository.findAllByOrderByRatingDesc();
+        for(Team t: teamList) {
+            updateRating(t.getId());
+        }
+        return teamList.subList(0, 19);
     }
 
     public Team createTeam(Team team){

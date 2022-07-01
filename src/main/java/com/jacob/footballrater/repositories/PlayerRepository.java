@@ -12,4 +12,5 @@ public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
     List<Player> getPlayerByTeamNameOrderByRatingDesc(String teamName);
 
+    List<Player> findAllByOrderByRatingDesc();
 }

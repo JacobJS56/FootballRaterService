@@ -1,7 +1,9 @@
 package com.jacob.footballrater.controllers;
 
 import com.jacob.footballrater.dtos.PlayerDto;
+import com.jacob.footballrater.dtos.TeamDto;
 import com.jacob.footballrater.models.Player;
+import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.services.PlayerService;
 import com.jacob.footballrater.mapper.MapStructMapperImpl;
 import lombok.AllArgsConstructor;
@@ -42,6 +44,19 @@ public class PlayerController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/top-20")
+    public ResponseEntity<List<PlayerDto>> getAllTeamsByLeague() {
+
+        List<Player> playerList = playerService.getTop20Players();
+        List<PlayerDto> response = new ArrayList<>();
+
+        for(Player p: playerList)
+            response.add(mapStructMapper.playerToPlayerDto(p));
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<PlayerDto> createPlayer(@RequestBody PlayerDto playerDto){

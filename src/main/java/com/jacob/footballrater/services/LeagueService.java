@@ -4,11 +4,9 @@ import com.jacob.footballrater.models.League;
 import com.jacob.footballrater.models.Player;
 import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.repositories.LeagueRepository;
-import com.jacob.footballrater.repositories.TeamRepository;
 import lombok.AllArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,11 +17,9 @@ import java.util.Random;
 @Service
 @AllArgsConstructor
 public class LeagueService {
-
     private final TeamService teamService;
     private final PlayerService playerService;
     private final LeagueRepository leagueRepository;
-    private final TeamRepository teamRepository;
 
     public List<League> getAllLeagues() {
         return leagueRepository.findAll();

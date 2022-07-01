@@ -38,6 +38,12 @@ public class PlayerService {
         return playerRepository.getPlayerByTeamNameOrderByRatingDesc(t1.get(0).getTeamName());
     }
 
+    public List<Player> getTop20Players() {
+        List<Player> playerList = playerRepository.findAllByOrderByRatingDesc();
+
+        return playerList.subList(0, 19);
+    }
+
     public Player createPlayer(Player player){
         List<Team> t1 = teamRepository.findByTeamName(player.getTeamName());
 
