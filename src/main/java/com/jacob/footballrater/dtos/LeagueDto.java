@@ -11,13 +11,10 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeamDto {
+public class LeagueDto {
 
     private UUID id;
-    private String teamName;
     private String league;
-    private Double rating;
-    private String manager;
-    private String stadium;
-    private String logo;
+    private String image;
+
 }

@@ -24,25 +24,23 @@ public class Player {
     @Type(type="org.hibernate.type.UUIDCharType")
     @Column(name="id", updatable = false)
     private UUID id;
-
     @Column(name="first_name", nullable=false, columnDefinition = "TEXT")
     private String firstName;
-
     @Column(name="last_name", nullable=false, columnDefinition = "TEXT")
     private String lastName;
-
     @Column(name="combined_name", nullable=false, columnDefinition = "TEXT")
     private String combinedName;
-
     @Column(name="team_name", nullable=false, columnDefinition = "TEXT")
     private String teamName;
-
     @Value("${some.key:0}")
     @Column(name="rating")
     private Double rating;
-
     @Value("#{'${some.key:{null}'.split(',')}")
     @ElementCollection
     private List<Double> ratingList;
+    @Column(name="image")
+    private String image;
+    @Column(name="league")
+    private String league;
 
 }

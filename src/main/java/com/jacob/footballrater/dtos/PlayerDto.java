@@ -21,5 +21,6 @@ public class PlayerDto  {
     private String teamName;
     private Double rating;
     private List<Double> ratingList;
-
+    private String image;
+    private String league;
 }

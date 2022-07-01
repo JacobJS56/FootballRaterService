@@ -35,7 +35,7 @@ public class PlayerService {
         if(t1 == null || t1.size() < 1)
             throw new ApiRequestException("Could not get players. Check team name exists");
 
-        return playerRepository.getPlayerByTeamName(t1.get(0).getTeamName());
+        return playerRepository.getPlayerByTeamNameOrderByRatingDesc(t1.get(0).getTeamName());
     }
 
     public Player createPlayer(Player player){

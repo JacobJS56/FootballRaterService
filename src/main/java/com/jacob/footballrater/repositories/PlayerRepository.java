@@ -10,6 +10,6 @@ import java.util.UUID;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
-    List<Player> getPlayerByTeamName(String teamName);
+    List<Player> getPlayerByTeamNameOrderByRatingDesc(String teamName);
 
 }
