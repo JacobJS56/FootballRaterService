@@ -77,6 +77,7 @@ public class LeagueService {
 
                 playerService.createPlayer(player);
             }
+            teamService.updateRating(team.getId());
         }
         return teamListResponse;
     }
