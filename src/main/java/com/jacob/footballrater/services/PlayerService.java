@@ -6,13 +6,9 @@ import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.repositories.PlayerRepository;
 import com.jacob.footballrater.repositories.TeamRepository;
 import lombok.AllArgsConstructor;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Service

@@ -1,10 +1,10 @@
-package com.example.footballrater2;
+package com.example.footballrater;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Footballrater2ApplicationTests {
+class FootballraterApplicationTests {
 
     @Test
     void contextLoads() {
