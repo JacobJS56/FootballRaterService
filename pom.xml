@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>footballrater2</artifactId>
+    <artifactId>footballrater</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>footballrater2</name>
-    <description>footballrater2</description>
+    <name>footballrater</name>
+    <description>footballrater</description>
     <properties>
         <java.version>11</java.version>
         <org.mapstruct.version>1.5.1.Final</org.mapstruct.version>
