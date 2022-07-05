@@ -8,6 +8,7 @@ import com.jacob.footballrater.repositories.TeamRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +18,7 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Player getPlayer(UUID id){
         Player player = playerRepository.findById(id).
@@ -58,17 +60,16 @@ public class PlayerService {
                 .orElseThrow(() ->
                         new ApiRequestException(String.format("Player could not be found with ID: %s", id)));
 
-        p1.getRatingList().add(player.getRating());
-
-        double sum = 0;
-        for(double i: p1.getRatingList())
-            sum += i;
-        sum = sum/p1.getRatingList().size();
+        double ratingTotal = p1.getRatingTotal() + player.getRating();
+        int numOfRatings = p1.getNumOfRatings() + 1;
+        double sum = ratingTotal / numOfRatings;
 
         if(sum > 10 || sum < 0)
             throw new ApiRequestException("Ratting sum cannot be less than 0 or more than 10");
 
-        p1.setRating(sum);
+        p1.setRating(Double.parseDouble(df.format(sum)));
+        p1.setRatingTotal(ratingTotal);
+        p1.setNumOfRatings(numOfRatings);
 
         playerRepository.save(p1);
 

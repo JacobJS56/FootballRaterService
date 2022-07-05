@@ -22,7 +22,8 @@ public class MapStructMapperImpl implements MapStructMapper {
                 .combinedName(player.getCombinedName())
                 .teamName(player.getTeamName())
                 .rating(player.getRating())
-                .ratingList(player.getRatingList())
+                .ratingTotal(player.getRatingTotal())
+                .numOfRatings(player.getNumOfRatings())
                 .image(player.getImage())
                 .league(player.getLeague())
                 .build();
@@ -41,7 +42,8 @@ public class MapStructMapperImpl implements MapStructMapper {
                 .combinedName(playerDto.getCombinedName())
                 .teamName(playerDto.getTeamName())
                 .rating(playerDto.getRating())
-                .ratingList(playerDto.getRatingList())
+                .ratingTotal(playerDto.getRatingTotal())
+                .numOfRatings(playerDto.getNumOfRatings())
                 .image(playerDto.getImage())
                 .league(playerDto.getLeague())
                 .build();

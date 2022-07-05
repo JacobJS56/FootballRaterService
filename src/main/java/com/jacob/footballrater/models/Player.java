@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -35,9 +34,10 @@ public class Player {
     @Value("${some.key:0}")
     @Column(name="rating")
     private Double rating;
-    @Value("#{'${some.key:{null}'.split(',')}")
-    @ElementCollection
-    private List<Double> ratingList;
+    @Column(name="rating_total")
+    private Double ratingTotal;
+    @Column(name="number_of_ratings")
+    private int numOfRatings;
     @Column(name="image")
     private String image;
     @Column(name="league")

@@ -73,6 +73,8 @@ public class LeagueService {
                         .image(jsonObj.getString("image"))
                         .teamName(tJSONObj.getString("teamName"))
                         .rating(nthRandomNumber)
+                        .ratingTotal(nthRandomNumber)
+                        .numOfRatings(1)
                         .league(obj.getString("league"))
                         .build();
 

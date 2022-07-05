@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -20,7 +19,8 @@ public class PlayerDto  {
     private String combinedName;
     private String teamName;
     private Double rating;
-    private List<Double> ratingList;
+    private Double ratingTotal;
+    private int numOfRatings;
     private String image;
     private String league;
 }
