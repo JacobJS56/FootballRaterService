@@ -27,55 +27,52 @@ public class LeagueService {
 
     public List<Team> createLeague(Map<String, Object> teamList) {
         List<Team> teamListResponse = new ArrayList<>();
-        JSONObject obj = new JSONObject(teamList);
-        JSONArray teamJSONArray = obj.getJSONArray("teamList");
-
-        System.out.println(obj.getString("league"));
-        System.out.println(obj.getString("image"));
+        JSONObject leagueObj = new JSONObject(teamList);
+        JSONArray teamJSONArray = leagueObj.getJSONArray("teamList");
 
         leagueRepository.save(League.builder()
-                .league(obj.getString("league"))
-                .image(obj.getString("image"))
+                .league(leagueObj.getString("league"))
+                .image(leagueObj.getString("image"))
                 .build());
 
         for(Object t: teamJSONArray) {
-            JSONObject tJSONObj = (JSONObject) t;
-            JSONArray playerList = tJSONObj.getJSONArray("playerList");
+            JSONObject teamJSONObj = (JSONObject) t;
+            JSONArray playerList = teamJSONObj.getJSONArray("playerList");
 
             Team team = Team.builder()
-                    .teamName(tJSONObj.getString("teamName"))
-                    .league(obj.getString("league"))
-                    .manager(tJSONObj.getString("manager"))
-                    .stadium(tJSONObj.getString("stadium"))
-                    .logo(tJSONObj.getString("logo"))
+                    .teamName(teamJSONObj.getString("teamName"))
+                    .league(leagueObj.getString("league"))
+                    .manager(teamJSONObj.getString("manager"))
+                    .stadium(teamJSONObj.getString("stadium"))
+                    .logo(teamJSONObj.getString("logo"))
                     .build();
             teamListResponse.add(teamService.createTeam(team));
 
             Random random = new Random();
             for(Object p: playerList) {
-                JSONObject jsonObj = (JSONObject) p;
-                String combinedName = jsonObj.getString("name");
-
+                JSONObject playerJSONObj = (JSONObject) p;
+                
+                // name code
+                String combinedName = playerJSONObj.getString("name");
                 String[] nameSplit = combinedName.split(" ");
                 String firstName = nameSplit[0];
                 String lastName = "";
-
                 if(nameSplit.length == 2) lastName = nameSplit[1];
                 if(nameSplit.length == 3) lastName = nameSplit[1] + " " + nameSplit[2];
 
                 // quick modification instead of rating for testing
-                double nthRandomNumber = random.nextInt(1000) / 100.0;
+                double randomRating = random.nextInt(1000) / 100.0;
 
                 Player player = Player.builder()
                         .firstName(firstName)
                         .lastName(lastName)
                         .combinedName(combinedName)
-                        .image(jsonObj.getString("image"))
-                        .teamName(tJSONObj.getString("teamName"))
-                        .rating(nthRandomNumber)
-                        .ratingTotal(nthRandomNumber)
+                        .image(playerJSONObj.getString("image"))
+                        .teamName(teamJSONObj.getString("teamName"))
+                        .rating(randomRating)
+                        .ratingTotal(randomRating)
                         .numOfRatings(1)
-                        .league(obj.getString("league"))
+                        .league(leagueObj.getString("league"))
                         .build();
 
                 playerService.createPlayer(player);

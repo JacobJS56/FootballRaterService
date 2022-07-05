@@ -31,8 +31,8 @@ public class TeamService {
     public List<Team> getAllTeamsByLeague(String league) {
         List<Team> listOfTeams = teamRepository.findByLeague(league);
 
-        for(Team t: listOfTeams) {
-            updateRating(t.getId());
+        for(Team t1: listOfTeams) {
+            updateRating(t1.getId());
         }
 
         return listOfTeams;
@@ -40,8 +40,8 @@ public class TeamService {
 
     public List<Team> getTop20Teams() {
         List<Team> teamList = teamRepository.findAllByOrderByRatingDesc();
-        for(Team t: teamList) {
-            updateRating(t.getId());
+        for(Team t1: teamList) {
+            updateRating(t1.getId());
         }
         return teamList.subList(0, 19);
     }

@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @SpringBootApplication
-public class Footballrater2Application {
+public class FootballraterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Footballrater2Application.class, args);
+        SpringApplication.run(FootballraterApplication.class, args);
     }
 
 }
