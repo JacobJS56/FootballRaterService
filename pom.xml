@@ -64,7 +64,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>FootballraterApplication.main</mainClass>
+                            <mainClass>com.jacob.footballrater.FootballraterApplication.main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
