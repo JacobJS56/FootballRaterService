@@ -1,4 +1,4 @@
-package com.jacob.footballrater.repository;
+/*package com.jacob.footballrater.repository;
 
 import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.repositories.TeamRepository;
@@ -63,6 +63,7 @@ class TeamRepositoryTest {
         assertThat(manchesterUtd).isEqualTo(actual);
     }
 
+
     @Test
     void itShouldFindByLeague() {
         // given
@@ -84,4 +85,4 @@ class TeamRepositoryTest {
         // then
         assertThat(expected).isEqualTo(actual);
     }
-}
+}*/
