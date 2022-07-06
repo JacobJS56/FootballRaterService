@@ -8,7 +8,7 @@
         <version>2.7.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+    <groupId>com.jacob</groupId>
     <artifactId>footballrater</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>footballrater</name>
@@ -55,14 +55,15 @@
     </dependencies>
 
     <build>
+        <finalName>myJar</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${project.parent.version}</version>
                 <configuration>
+                    <classifier>boot</classifier>
                     <excludes>
-                        <id>repackage</id>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
