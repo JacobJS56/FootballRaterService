@@ -1,9 +1,7 @@
-package com.jacob.footballrater.player;
+package com.jacob.footballrater.repository;
 
 import com.jacob.footballrater.models.Player;
-import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.repositories.PlayerRepository;
-import com.jacob.footballrater.repositories.TeamRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,21 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
-@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTest
 class PlayerRepositoryTest {
 
     @Autowired
     private PlayerRepository underTest;
-    private Player playerOne;
-    private Player playerTwo;
+    private Player rashford;
+    private Player kroos;
 
     @BeforeEach
-    void setUp() {
-        playerOne = Player.builder()
+    void setup() {
+        rashford = Player.builder()
                 .firstName("Marcus")
                 .lastName("Rashford")
                 .combinedName("Marcus Rashford")
@@ -42,7 +39,7 @@ class PlayerRepositoryTest {
                 .image("image")
                 .league("Premier League")
                 .build();
-        playerTwo = Player.builder()
+        kroos = Player.builder()
                 .firstName("Toni")
                 .lastName("Kroos")
                 .combinedName("Toni Kroos")
@@ -53,8 +50,8 @@ class PlayerRepositoryTest {
                 .image("image")
                 .league("La Liga Santander")
                 .build();
-        underTest.save(playerOne);
-        underTest.save(playerTwo);
+        underTest.save(rashford);
+        underTest.save(kroos);
     }
 
     @AfterEach
@@ -64,18 +61,23 @@ class PlayerRepositoryTest {
 
     @Test
     void itShouldGetPlayerByTeamNameOrderByRatingDesc() {
+        // given
         String teamName = "Manchester United";
+        // when
         Player actual = underTest.getPlayerByTeamNameOrderByRatingDesc(teamName).get(0);
-        assertThat(playerOne).isEqualTo(actual);
+        // then
+        assertThat(rashford).isEqualTo(actual);
     }
 
     @Test
     void itShouldFindAllByOrderByRatingDesc() {
+        // given
         List<Player> expected = new ArrayList<>();
-        expected.add(playerOne);
-        expected.add(playerTwo);
-
+        expected.add(rashford);
+        expected.add(kroos);
+        // when
         List<Player> actual = underTest.findAllByOrderByRatingDesc();
+        // then
         assertThat(expected).isEqualTo(actual);
     }
 }

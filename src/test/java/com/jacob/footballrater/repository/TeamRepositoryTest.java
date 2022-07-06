@@ -1,4 +1,4 @@
-package com.jacob.footballrater.team;
+package com.jacob.footballrater.repository;
 
 import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.repositories.TeamRepository;
@@ -17,18 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@DataJpaTest
 class TeamRepositoryTest {
 
     @Autowired
     private TeamRepository underTest;
-    private Team teamOne;
-    private Team teamTwo;
+    private Team manchesterUtd;
+    private Team realMadrid;
 
     @BeforeEach
-    void setUp() {
-        teamOne = Team.builder()
+    void setup() {
+        manchesterUtd = Team.builder()
                 .teamName("Manchester United")
                 .league("Premier League")
                 .manager("Ralf Rangnick")
@@ -36,7 +36,7 @@ class TeamRepositoryTest {
                 .rating(7.8)
                 .logo("www.googledrive.com/logo")
                 .build();
-        teamTwo = Team.builder()
+        realMadrid = Team.builder()
                 .teamName("Real Madrid")
                 .league("La liga")
                 .manager("Carlo Ancelotti")
@@ -44,8 +44,8 @@ class TeamRepositoryTest {
                 .rating(5.1)
                 .logo("www.googledrive.com/logo")
                 .build();
-        underTest.save(teamOne);
-        underTest.save(teamTwo);
+        underTest.save(manchesterUtd);
+        underTest.save(realMadrid);
     }
 
     @AfterEach
@@ -55,24 +55,33 @@ class TeamRepositoryTest {
 
     @Test
     void itShouldFindByTeamName() {
+        // given
         String teamName = "Manchester United";
+        // when
         Team actual = underTest.findByTeamName(teamName).get(0);
-        assertThat(teamOne).isEqualTo(actual);
+        // then
+        assertThat(manchesterUtd).isEqualTo(actual);
     }
 
     @Test
     void itShouldFindByLeague() {
+        // given
         String league = "Premier League";
+        // when
         Team actual = underTest.findByLeague(league).get(0);
-        assertThat(teamOne).isEqualTo(actual);
+        // then
+        assertThat(manchesterUtd).isEqualTo(actual);
     }
 
     @Test
     void itShouldFindAllByOrderByRatingDesc() {
+        // given
         List<Team> expected = new ArrayList<>();
-        expected.add(teamOne);
-        expected.add(teamTwo);
+        expected.add(manchesterUtd);
+        expected.add(realMadrid);
+        // when
         List<Team> actual = underTest.findAllByOrderByRatingDesc();
+        // then
         assertThat(expected).isEqualTo(actual);
     }
 }

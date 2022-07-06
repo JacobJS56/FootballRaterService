@@ -6,11 +6,9 @@ import com.jacob.footballrater.repositories.PlayerRepository;
 import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.repositories.TeamRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,9 +21,7 @@ public class TeamService {
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Team getTeam(UUID id){
-        Team t1 = updateRating(id);
-
-        return t1;
+        return updateRating(id);
     }
 
     public List<Team> getAllTeamsByLeague(String league) {
@@ -43,13 +39,16 @@ public class TeamService {
         for(Team t1: teamList) {
             updateRating(t1.getId());
         }
+
+        if(teamList.size() < 19) return teamList.subList(0, teamList.size()-1);
+
         return teamList.subList(0, 19);
     }
 
     public Team createTeam(Team team){
         List<Team> t1 = teamRepository.findByTeamName(team.getTeamName());
 
-        if(t1.size() > 0)
+        if(t1 == null || t1.size() > 1)
             throw new ApiRequestException(String.format("A team already exists with that name: %s", team.getTeamName()));
 
         teamRepository.save(team);
