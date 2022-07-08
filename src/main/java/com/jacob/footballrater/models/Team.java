@@ -1,14 +1,13 @@
 package com.jacob.footballrater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
-import java.util.UUID;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,28 +18,24 @@ import java.util.UUID;
 public class Team {
 
     @Id
-    @GeneratedValue
-    @Type(type="org.hibernate.type.UUIDCharType")
-    @Column(name="id", updatable = false)
-    private UUID id;
-
-    @Column(name="team_name", nullable=false, columnDefinition = "TEXT")
+    @Column(name="team_id", updatable = false)
+    private int teamId;
+    @Column(name="team_name", nullable=false)
     private String teamName;
-
-    @Column(name="league")
-    private String league;
-
-    @Column(name="manager")
-    private String manager;
-
     @Column(name="stadium")
     private String stadium;
+    @Column(name="team_logo")
+    private String teamLogo;
 
-    @Value("${some.key:0}")
-    @Column(name="rating")
-    private Double rating;
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(
+            name="enrollments",
+            joinColumns = @JoinColumn(name="team_id"),
+            inverseJoinColumns = @JoinColumn(name="competition_id"))
+    private List<Competition> competitions;
 
-    @Column(name="logo")
-    private String logo;
-
+    @OneToMany(targetEntity = Person.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_fk", referencedColumnName = "team_id")
+    private List<Person> personList;
 }

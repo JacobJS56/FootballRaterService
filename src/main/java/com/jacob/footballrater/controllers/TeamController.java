@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @CrossOrigin
 @RestController
@@ -23,7 +22,7 @@ public class TeamController {
     private final MapStructMapperImpl mapStructMapper;
 
     @GetMapping("/{id}")
-    public ResponseEntity<TeamDto> getTeam(@PathVariable("id") UUID id) {
+    public ResponseEntity<TeamDto> getTeam(@PathVariable("id") int id) {
 
         Team team = teamService.getTeam(id);
         TeamDto teamResponse =  mapStructMapper.teamToTeamDto(team);
@@ -31,47 +30,28 @@ public class TeamController {
         return new ResponseEntity<>(teamResponse, HttpStatus.OK);
     }
 
-    @GetMapping("/all/{league}")
-    public ResponseEntity<List<TeamDto>> getAllTeamsByLeague(@PathVariable("league") String league) {
-
-        List<Team> teamList = teamService.getAllTeamsByLeague(league);
-        List<TeamDto> response = new ArrayList<>();
-
-        for(Team t: teamList)
-            response.add(mapStructMapper.teamToTeamDto(t));
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping("/top-20")
-    public ResponseEntity<List<TeamDto>> getAllTeamsByLeague() {
-
-        List<Team> teamList = teamService.getTop20Teams();
-        List<TeamDto> response = new ArrayList<>();
-
-        for(Team t: teamList)
-            response.add(mapStructMapper.teamToTeamDto(t));
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<TeamDto> createTeam(@RequestBody TeamDto teamDto) {
 
-        Team teamRequest = mapStructMapper.teamDtoToTeam(teamDto);
-        Team team = teamService.createTeam(teamRequest);
-        TeamDto teamResponse =  mapStructMapper.teamToTeamDto(team);
+        Team team = mapStructMapper.teamDtoToTeam(teamDto);
+        TeamDto teamResponse =  mapStructMapper.teamToTeamDto(
+                teamService.createTeam(team));
 
         return new ResponseEntity<>(teamResponse, HttpStatus.CREATED);
     }
 
+    @PostMapping("all")
+    public ResponseEntity<List<TeamDto>> createMultipleTeams(@RequestBody List<TeamDto> teamDtoList) {
+        List<Team> team = new ArrayList<>();
+        for(TeamDto t: teamDtoList)
+            team.add(mapStructMapper.teamDtoToTeam(t));
 
-    @GetMapping("/rating/{id}")
-    public ResponseEntity<TeamDto> updateRating(@PathVariable("id") UUID id) {
+        List<Team> teamResponse = teamService.createMultipleTeams(team);
+        List<TeamDto> teamDtoResponse = new ArrayList<>();
+        for(Team t: teamResponse)
+            teamDtoResponse.add(mapStructMapper.teamToTeamDto(t));
 
-        Team team = teamService.updateRating(id);
-        TeamDto teamResponse =  mapStructMapper.teamToTeamDto(team);
-
-        return new ResponseEntity<>(teamResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(teamDtoResponse, HttpStatus.CREATED);
     }
+
 }

@@ -1,11 +1,13 @@
 package com.jacob.footballrater.dtos;
 
+import com.jacob.footballrater.models.Competition;
+import com.jacob.footballrater.models.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import java.util.List;
 
 @Data
 @Builder
@@ -13,11 +15,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class TeamDto {
 
-    private UUID id;
+    private int teamId;
     private String teamName;
-    private String league;
-    private Double rating;
-    private String manager;
     private String stadium;
-    private String logo;
+    private String teamLogo;
+    private List<Competition> competitions;
 }

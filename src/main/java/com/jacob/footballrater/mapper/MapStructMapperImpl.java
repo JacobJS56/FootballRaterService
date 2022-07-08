@@ -1,9 +1,9 @@
 package com.jacob.footballrater.mapper;
 
-import com.jacob.footballrater.dtos.LeagueDto;
-import com.jacob.footballrater.dtos.PlayerDto;
-import com.jacob.footballrater.models.League;
-import com.jacob.footballrater.models.Player;
+import com.jacob.footballrater.dtos.CompetitionDto;
+import com.jacob.footballrater.dtos.PersonDto;
+import com.jacob.footballrater.models.Competition;
+import com.jacob.footballrater.models.Person;
 import com.jacob.footballrater.dtos.TeamDto;
 import com.jacob.footballrater.models.Team;
 import org.springframework.stereotype.Component;
@@ -12,43 +12,41 @@ import org.springframework.stereotype.Component;
 public class MapStructMapperImpl implements MapStructMapper {
 
     @Override
-    public PlayerDto playerToPlayerDto(Player player) {
-        if(player == null) return null;
+    public PersonDto personToPersonDto(Person person) {
+        if(person == null) return null;
 
-        PlayerDto playerDto = PlayerDto.builder()
-                .id(player.getId())
-                .firstName(player.getFirstName())
-                .lastName(player.getLastName())
-                .combinedName(player.getCombinedName())
-                .teamName(player.getTeamName())
-                .rating(player.getRating())
-                .ratingTotal(player.getRatingTotal())
-                .numOfRatings(player.getNumOfRatings())
-                .image(player.getImage())
-                .league(player.getLeague())
+        PersonDto personDto = PersonDto.builder()
+                .personId(person.getPersonId())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .teamId(person.getTeamId())
+                .overallRating(person.getOverallRating())
+                .ratingList(person.getRatingList())
+                .position(person.getPosition())
+                .shirtNumber(person.getShirtNumber())
+                .personImage(person.getPersonImage())
                 .build();
 
-        return playerDto;
+        return personDto;
     }
 
     @Override
-    public Player playerDtoToPlayer(PlayerDto playerDto) {
-        if(playerDto == null) return null;
+    public Person personDtoToPerson(PersonDto personDto) {
+        if(personDto == null) return null;
 
-        Player player = Player.builder()
-                .id(playerDto.getId())
-                .firstName(playerDto.getFirstName())
-                .lastName(playerDto.getLastName())
-                .combinedName(playerDto.getCombinedName())
-                .teamName(playerDto.getTeamName())
-                .rating(playerDto.getRating())
-                .ratingTotal(playerDto.getRatingTotal())
-                .numOfRatings(playerDto.getNumOfRatings())
-                .image(playerDto.getImage())
-                .league(playerDto.getLeague())
+        Person person = Person.builder()
+                .personId(personDto.getPersonId())
+                .firstName(personDto.getFirstName())
+                .lastName(personDto.getLastName())
+                .teamId(personDto.getTeamId())
+                .overallRating(personDto.getOverallRating())
+                .ratingList(personDto.getRatingList())
+                .position(personDto.getPosition())
+                .shirtNumber(personDto.getShirtNumber())
+                .personImage(personDto.getPersonImage())
                 .build();
 
-        return player;
+        return person;
     }
 
     @Override
@@ -56,13 +54,11 @@ public class MapStructMapperImpl implements MapStructMapper {
         if(team == null) return null;
 
         TeamDto teamDto = TeamDto.builder()
-                .id(team.getId())
+                .teamId(team.getTeamId())
                 .teamName(team.getTeamName())
-                .league(team.getLeague())
-                .manager(team.getManager())
                 .stadium(team.getStadium())
-                .rating(team.getRating())
-                .logo(team.getLogo())
+                .teamLogo(team.getTeamLogo())
+                .competitions(team.getCompetitions())
                 .build();
 
         return teamDto;
@@ -73,42 +69,44 @@ public class MapStructMapperImpl implements MapStructMapper {
         if(teamDto == null) return null;
 
         Team team = Team.builder()
-                .id(teamDto.getId())
+                .teamId(teamDto.getTeamId())
                 .teamName(teamDto.getTeamName())
-                .league(teamDto.getLeague())
-                .manager(teamDto.getManager())
                 .stadium(teamDto.getStadium())
-                .rating(teamDto.getRating())
-                .logo(teamDto.getLogo())
+                .teamLogo(teamDto.getTeamLogo())
+                .competitions(teamDto.getCompetitions())
                 .build();
 
         return team;
     }
 
     @Override
-    public LeagueDto leagueToLeagueDto(League league) {
-        if(league == null) return null;
+    public CompetitionDto compeitionToCompetitionDto(Competition competition) {
+        if(competition == null) return null;
 
-        LeagueDto leagueDto = LeagueDto.builder()
-                .id(league.getId())
-                .league(league.getLeague())
-                .image(league.getImage())
+        CompetitionDto competitionDto = CompetitionDto.builder()
+                .competitionId(competition.getCompetitionId())
+                .competitionName(competition.getCompetitionName())
+                .competitionLogo(competition.getCompetitionLogo())
+                .numOfGameweeks(competition.getNumOfGameweeks())
+                .teams(competition.getTeams())
                 .build();
 
-        return leagueDto;
+        return competitionDto;
     }
 
     @Override
-    public League leagueDtoToLeague(LeagueDto leagueDto) {
-        if(leagueDto == null) return null;
+    public Competition compeitionDtoToCompetition(CompetitionDto competitionDto) {
+        if(competitionDto == null) return null;
 
-        League league = League.builder()
-                .id(leagueDto.getId())
-                .league(leagueDto.getLeague())
-                .image(leagueDto.getImage())
+        Competition competition = Competition.builder()
+                .competitionId(competitionDto.getCompetitionId())
+                .competitionName(competitionDto.getCompetitionName())
+                .competitionLogo(competitionDto.getCompetitionLogo())
+                .numOfGameweeks(competitionDto.getNumOfGameweeks())
+                .teams(competitionDto.getTeams())
                 .build();
 
-        return league;
+        return competition;
     }
 
 
