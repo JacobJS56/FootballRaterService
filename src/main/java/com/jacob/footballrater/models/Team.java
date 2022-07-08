@@ -28,7 +28,6 @@ public class Team {
     private String teamLogo;
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name="enrollments",
             joinColumns = @JoinColumn(name="team_id"),
@@ -36,6 +35,6 @@ public class Team {
     private List<Competition> competitions;
 
     @OneToMany(targetEntity = Person.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_fk", referencedColumnName = "team_id")
+    @JoinColumn(name = "team_id", referencedColumnName = "team_id")
     private List<Person> personList;
 }

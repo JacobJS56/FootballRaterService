@@ -1,7 +1,11 @@
 package com.jacob.footballrater.controllers;
 
 import com.jacob.footballrater.dtos.PersonDto;
+import com.jacob.footballrater.dtos.RatingDto;
+import com.jacob.footballrater.dtos.TeamDto;
 import com.jacob.footballrater.models.Person;
+import com.jacob.footballrater.models.Rating;
+import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.services.PersonService;
 import com.jacob.footballrater.mapper.MapStructMapperImpl;
 import lombok.AllArgsConstructor;
@@ -14,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v2/player")
+@RequestMapping("/api/v2/person")
 @AllArgsConstructor
 public class PersonController {
 
@@ -30,6 +34,28 @@ public class PersonController {
         return new ResponseEntity<>(playerResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<PersonDto>> getAllPersons() {
+
+        List<Person> personList = personService.getAllPersons();
+        List<PersonDto> response = new ArrayList<>();
+        for(Person person: personList) {
+            response.add(mapStructMapper.personToPersonDto(person));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/all-team/{id}")
+    public ResponseEntity<List<PersonDto>> getAllPersons(@PathVariable("id") int teamId) {
+
+        List<Person> personList = personService.getAllPersonsByTeamId(teamId);
+        List<PersonDto> response = new ArrayList<>();
+        for(Person person: personList) {
+            response.add(mapStructMapper.personToPersonDto(person));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<PersonDto> createPerson(@RequestBody PersonDto personDto){
 
@@ -40,7 +66,7 @@ public class PersonController {
         return new ResponseEntity<>(personResponse, HttpStatus.CREATED);
     }
 
-    @PostMapping("all")
+    @PostMapping("/all")
     public ResponseEntity<List<PersonDto>> createMultipleTeams(@RequestBody List<PersonDto> personDtoList) {
         List<Person> person = new ArrayList<>();
         for(PersonDto p: personDtoList)
@@ -52,6 +78,11 @@ public class PersonController {
             personDtoResponse.add(mapStructMapper.personToPersonDto(p2));
 
         return new ResponseEntity<>(personDtoResponse, HttpStatus.CREATED);
+    }
+    @PostMapping("/update-rating/{personId}")
+    public ResponseEntity<RatingDto> updateRating(@PathVariable("personId") int personId, @RequestBody RatingDto ratingDto) {
+        Rating response = personService.updateRating(personId, ratingDto);
+        return new ResponseEntity<>(mapStructMapper.ratingToRatingDto(response), HttpStatus.OK);
     }
 
 }

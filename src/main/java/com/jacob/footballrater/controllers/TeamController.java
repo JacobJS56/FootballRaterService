@@ -30,6 +30,17 @@ public class TeamController {
         return new ResponseEntity<>(teamResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<TeamDto>> getAllTeams() {
+
+        List<Team> teamList = teamService.getAllTeams();
+        List<TeamDto> response = new ArrayList<>();
+        for(Team team: teamList) {
+            response.add(mapStructMapper.teamToTeamDto(team));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<TeamDto> createTeam(@RequestBody TeamDto teamDto) {
 

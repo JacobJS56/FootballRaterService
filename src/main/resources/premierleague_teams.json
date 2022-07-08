@@ -24,7 +24,7 @@
         "logo": "https://drive.google.com/file/d/1-C4fd8zizMWkBylgBZGZ0OIip8zcox1Z/view?usp=drivesdk"
     },
     {
-        "teamId": "999",
+        "teamId": "1201",
         "teamName": "Brighton & Hove",
         "stadium": "1901",
         "logo": "https://drive.google.com/file/d/1-Em0_t9Q0yFZ6w0JIZHZMaR-AhdKG43Q/view?usp=drivesdk"
@@ -66,6 +66,7 @@
         "logo": "https://drive.google.com/file/d/100HlMJw9rUYDEppwdB6161kFdwJy3A0G/view?usp=drivesdk"
     },
     {
+        "teamId": "30",
         "teamName": "Man United",
         "stadium": "1878",
         "logo": "https://drive.google.com/file/d/101d5BTXmuH2SkDhLcMBnw0QzjjWChv_S/view?usp=drivesdk"

@@ -25,6 +25,10 @@ public class TeamService {
         return team;
     }
 
+    public List<Team> getAllTeams() {
+        return teamRepository.findAll();
+    }
+
     public Team createTeam(Team team){
         Team t1 = teamRepository.findById(team.getTeamId()).orElse(null);
 

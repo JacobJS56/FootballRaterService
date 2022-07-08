@@ -4,6 +4,25 @@
   "competitionLogo": "https://drive.google.com/file/d/1x_b5580ihEPr2vkT8VX7zi8em51xRnt8/view?usp=sharing",
   "numOfGameweeks": 20,
   "teams": [
-    
+      {"teamId": 31},
+      {"teamId": 57},
+      {"teamId": 301},
+      {"teamId": 78},
+      {"teamId": 1201},
+      {"teamId": 132},
+      {"teamId": 340},
+      {"teamId": 42},
+      {"teamId": 38},
+      {"teamId": 320},
+      {"teamId": 199},
+      {"teamId": 30},
+      {"teamId": 185},
+      {"teamId": 198},
+      {"teamId": 43},
+      {"teamId": 158},
+      {"teamId": 110},
+      {"teamId": 84},
+      {"teamId": 302},
+      {"teamId": 92}
   ]
 }

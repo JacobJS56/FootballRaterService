@@ -1,8 +1,10 @@
 package com.jacob.footballrater.controllers;
 
 import com.jacob.footballrater.dtos.CompetitionDto;
+import com.jacob.footballrater.dtos.TeamDto;
 import com.jacob.footballrater.mapper.MapStructMapperImpl;
 import com.jacob.footballrater.models.Competition;
+import com.jacob.footballrater.models.Team;
 import com.jacob.footballrater.services.CompetitionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,17 @@ public class CompetitionController {
         CompetitionDto competitionResponse =  mapStructMapper.compeitionToCompetitionDto(competition);
 
         return new ResponseEntity<>(competitionResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<CompetitionDto>> getAllCompetitions() {
+
+        List<Competition> competitionList = competitionService.getAllCompetitions();
+        List<CompetitionDto> response = new ArrayList<>();
+        for(Competition competition: competitionList) {
+            response.add(mapStructMapper.compeitionToCompetitionDto(competition));
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping

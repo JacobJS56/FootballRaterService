@@ -1,7 +1,6 @@
 package com.jacob.footballrater.dtos;
 
 import com.jacob.footballrater.models.Competition;
-import com.jacob.footballrater.models.Person;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +18,4 @@ public class TeamDto {
     private String teamName;
     private String stadium;
     private String teamLogo;
-    private List<Competition> competitions;
 }

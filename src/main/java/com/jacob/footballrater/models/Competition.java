@@ -1,5 +1,6 @@
 package com.jacob.footballrater.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class Competition {
     private int numOfGameweeks;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name="enrollments",
             joinColumns = @JoinColumn(name="competition_id"),

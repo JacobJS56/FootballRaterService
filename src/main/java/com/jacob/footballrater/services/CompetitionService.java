@@ -1,5 +1,6 @@
 package com.jacob.footballrater.services;
 
+import com.jacob.footballrater.dtos.CompetitionDto;
 import com.jacob.footballrater.exceptions.ApiRequestException;
 import com.jacob.footballrater.models.Competition;
 import com.jacob.footballrater.models.Team;
@@ -22,6 +23,11 @@ public class CompetitionService {
 
         return competition;
     }
+
+    public List<Competition> getAllCompetitions() {
+        return competitionRepository.findAll();
+    }
+
 
     public Competition createCompetition(Competition competition) {
         Competition c1 = competitionRepository.findById(competition.getCompetitionId()).orElse(null);

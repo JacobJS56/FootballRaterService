@@ -2,9 +2,11 @@ package com.jacob.footballrater.mapper;
 
 import com.jacob.footballrater.dtos.CompetitionDto;
 import com.jacob.footballrater.dtos.PersonDto;
+import com.jacob.footballrater.dtos.RatingDto;
 import com.jacob.footballrater.dtos.TeamDto;
 import com.jacob.footballrater.models.Competition;
 import com.jacob.footballrater.models.Person;
+import com.jacob.footballrater.models.Rating;
 import com.jacob.footballrater.models.Team;
 import org.mapstruct.Mapper;
 
@@ -19,5 +21,8 @@ public interface MapStructMapper {
 
     CompetitionDto compeitionToCompetitionDto(Competition competition);
     Competition compeitionDtoToCompetition(CompetitionDto competitionDto);
+
+    Rating ratingDtoToRating(RatingDto ratingDto);
+    RatingDto ratingToRatingDto(Rating rating);
 
 }

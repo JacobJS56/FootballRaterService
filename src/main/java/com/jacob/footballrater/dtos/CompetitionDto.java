@@ -18,5 +18,5 @@ public class CompetitionDto {
     private String competitionName;
     private String competitionLogo;
     private int numOfGameweeks;
-    private List<Team> teams;
+    private List<TeamDto> teams;
 }
